@@ -7,7 +7,10 @@ interact('.dropzone')
     let item = document.querySelector('.drag-active');
     target.appendChild(item);
     item.classList.remove('drag-active');
-    item.style.transform = "none";
+    item.style.removeProperty('transform');
+    item.style.removeProperty('translate');
+    item.removeAttribute('data-x');
+    item.removeAttribute('data-y');
     target.classList.remove('target');
   })
 
@@ -41,15 +44,15 @@ function dragMoveListener (event) {
   var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
 
   // translate the element
-  // target.style.webkitTransform =
-  //   target.style.transform =
-  //     'translate(' + x + 'px, ' + y + 'px)'
+  target.style.webkitTransform =
+    target.style.transform =
+      'translate(' + x + 'px, ' + y + 'px)'
 
   // update the posiion attributes
   target.setAttribute('data-x', x)
   target.setAttribute('data-y', y)
 
-  return target
+  // return target
 }
 
 // this is used later in the resizing and gesture demos
