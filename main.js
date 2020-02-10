@@ -5,7 +5,11 @@ interact('.dropzone')
     event.target.classList.add('target')
     let target = event.target;
     let item = document.querySelector('.drag-active');
-    target.appendChild(item);
+
+    if (target.children.length < 1) {
+      target.appendChild(item);
+    }
+
     item.classList.remove('drag-active');
     item.style.removeProperty('transform');
     item.style.removeProperty('translate');
