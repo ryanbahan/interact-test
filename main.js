@@ -1,10 +1,15 @@
 interact('.dropzone')
   .dropzone({
-    accept: '.small-card',
   })
-  // .on('drop', function (event) {
-  //   event.target.classList.add('drop-activated')
-  // })
+  .on('drop', function (event) {
+    event.target.classList.add('target')
+    let target = event.target;
+    let item = document.querySelector('.drag-active');
+    target.appendChild(item);
+    item.classList.remove('drag-active');
+    item.style.transform = "none";
+    target.classList.remove('target');
+  })
 
 interact('.draggable')
   .draggable({
@@ -14,38 +19,37 @@ interact('.draggable')
     // keep the element within the area of it's parent
     modifiers: [
       interact.modifiers.restrictRect({
-        restriction: 'dropzone',
-        endOnly: true
+        // restriction: '.small-card-container',
+        // endOnly: true
       })
     ],
     // enable autoScroll
-    autoScroll: true,
+    autoScroll: false,
 
     // call this function on every dragmove event
     onmove: dragMoveListener,
     // call this function on every dragend event
-    onend: dropzoneFinal
-  })
+    // onend:
+    });
 
 function dragMoveListener (event) {
   var target = event.target
+  target.classList.add('drag-active')
 
   // keep the dragged position in the data-x/data-y attributes
   var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
   var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
 
   // translate the element
-  target.style.webkitTransform =
-    target.style.transform =
-      'translate(' + x + 'px, ' + y + 'px)'
+  // target.style.webkitTransform =
+  //   target.style.transform =
+  //     'translate(' + x + 'px, ' + y + 'px)'
 
   // update the posiion attributes
   target.setAttribute('data-x', x)
   target.setAttribute('data-y', y)
-}
 
-function dropzoneFinal(event) {
-    console.log(event.target);
+  return target
 }
 
 // this is used later in the resizing and gesture demos
