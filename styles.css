@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height:100%;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: 50%;
+}
+
+p {
+  color: white;
+  font-size: 35px;
+}
+
+.small-card-container {
+  display: flex;
+  border: solid 2px black;
+  border-radius: 5%;
+  margin: 5%;
+  background-color: #e4e4e4;
+}
+
+.small-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  border-radius: 5%;
+  margin: 5%;
+  background-color: blue;
+}
