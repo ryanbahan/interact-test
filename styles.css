@@ -9,9 +9,8 @@ html, body {
 }
 
 body {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: 50%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 p {
@@ -20,19 +19,41 @@ p {
 }
 
 .small-card-container {
+  width: min-content;
   display: flex;
+  justify-content: center;
+  align-items: center;
   border: solid 2px black;
   border-radius: 5%;
   margin: 5%;
   background-color: #e4e4e4;
+  min-width: 20vw;
 }
 
 .small-card {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
   border-radius: 5%;
   margin: 5%;
   background-color: blue;
+  width: 20vw;
+  height: 100%;
+}
+
+/* .large-card-container {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  margin: 2.5%;
+} */
+
+.large-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5%;
+  margin: 2.5%;
+  background-color: blue;
+  width: 50vw;
+  height: 100%;
 }
