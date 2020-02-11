@@ -9,9 +9,13 @@ html, body {
 }
 
 body {
+}
+
+.row-a,
+.row-b {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: 50%;
+  height: 50%;
 }
 
 p {
@@ -19,7 +23,7 @@ p {
   font-size: 35px;
 }
 
-.small-card-container {
+.card-container {
   display: flex;
   border: solid 2px black;
   border-radius: 5%;
@@ -34,5 +38,33 @@ p {
   flex-grow: 1;
   border-radius: 5%;
   margin: 5%;
+  background-color: blue;
+}
+
+.large-card-container {
+  display: flex;
+  border: solid 2px black;
+  border-radius: 5%;
+  margin: 2.5%;
+  background-color: #e4e4e4;
+}
+
+.large-card-right {
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+.large-card-left {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.large-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  border-radius: 5%;
+  margin: 2.5%;
   background-color: blue;
 }
