@@ -1,7 +1,10 @@
+
+// function to control what happens when an element is dropped
 interact('.dropzone')
   .dropzone({
   })
   .on('drop', function (event) {
+    // get the dragged item, target drop area, and current large card container
     let previousLargeContainer = document.querySelector('.large-card-container');
     let dropTarget = event.target;
     let draggedItem = document.querySelector('.drag-active');
@@ -10,26 +13,27 @@ interact('.dropzone')
     let rowB = document.querySelector('.row-b');
     let rows = [rowA, rowB];
 
+    // check which row has 2 elements and which row has 3 elements, and log the row element as well as its children
     let twoRow = rows.find(row => row.children.length === 2);
     let threeRow = rows.find(row => row.children.length === 3);
     let twoRowChildren = [...twoRow.children];
     let threeRowChildren = [...threeRow.children];
 
+    // each time a drop event is triggered, get the DOM elements and give them an ID based on their position
     twoRowChildren.forEach((child, index) => child.dataset.id = index );
     threeRowChildren.forEach((child, index) => child.dataset.id = index );
 
 
-        // small card to small card
+        // move small card to small card
       if (draggedItem.classList.contains('small-card') &&
       !dropTarget.classList.contains('large-card-container')) {
 
         draggedItem.parentNode.appendChild(dropTarget.children[0]);
         dropTarget.appendChild(draggedItem)
 
-        // large card to small card
       } else if (draggedItem.classList.contains('large-card') &&
       dropTarget.classList.contains('large-card-container')) {
-        
+        // move large card to small card
       } else if (draggedItem.classList.contains('large-card')) {
         // if in the same row
           if (draggedItem.parentNode.parentNode === dropTarget.parentNode) {
@@ -41,7 +45,7 @@ interact('.dropzone')
             moveLargeCardToNewRow();
           }
 
-        // small card to large card
+        // move small card to large card
       } else {
         // if in the same row
         if (draggedItem.parentNode.parentNode === dropTarget.parentNode) {
@@ -158,6 +162,7 @@ interact('.dropzone')
     resetItemCoordinates(draggedItem);
   })
 
+// reset coordinates when event is over
   function resetItemCoordinates(item) {
     item.classList.remove('drag-active');
     item.style.removeProperty('transform');
@@ -166,27 +171,26 @@ interact('.dropzone')
     item.removeAttribute('data-y');
   }
 
+// function to control what happens when an element is dragged
 interact('.draggable')
   .draggable({
 
-    // enable inertial throwing
+    // disable inertial throwing
     inertia: false,
-    // keep the element within the area of it's parent
     modifiers: [
       interact.modifiers.restrictRect({
         // restriction: '.small-card-container',
         // endOnly: true
       })
     ],
-    // enable autoScroll
+    // disable autoScroll
     autoScroll: false,
 
     // call this function on every dragmove event
     onmove: dragMoveListener,
-    // call this function on every dragend event
-    // onend:
     });
 
+// event listener
 function dragMoveListener (event) {
   var target = event.target
   target.classList.add('drag-active')
